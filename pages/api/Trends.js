@@ -1,26 +1,22 @@
-const googleTrends = require("google-trends-api");
+import googleTrends from 'google-trends-api';
 
 export default async function handler(req, res) {
-  const keyword = req.query.keyword || "affacturage";
-
   try {
+    const keyword = req.query.keyword || 'affacturage';
+
     const results = await googleTrends.interestOverTime({
       keyword,
-      startTime: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000),
-      geo: "FR"
+      startTime: new Date(Date.now() - (30 * 24 * 60 * 60 * 1000)), // 30 jours
+      geo: 'FR'
     });
-
-    const parsed = JSON.parse(results);
-    const timeline = parsed.default.timelineData;
-    const lastPoint = timeline[timeline.length - 1];
 
     res.status(200).json({
       motClef: keyword,
-      popularite: lastPoint.value[0],
-      region: "France",
-      periode: "30 derniers jours"
+      donnees: JSON.parse(results),
+      region: 'FR',
+      periode: '30 jours'
     });
   } catch (error) {
-    res.status(500).json({ error: "Erreur Trends", details: error.message });
+    res.status(500).json({ error: error.message });
   }
 }
