@@ -1,0 +1,37 @@
+# Cockpit Git Ignore — blindage souverain
+
+# Fichiers Word, Excel, PowerPoint
+*.docx
+*.xlsx
+*.pptx
+*.pdf
+*.zip
+*.rar
+
+# Fichiers temporaires
+*.tmp
+~$*
+*.bak
+*.old
+
+# Fichiers système
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Dossiers de dépendances
+node_modules/
+__pycache__/
+.env
+
+# Fichiers générés
+dist/
+build/
+.cache/
+.vscode/
+.idea/
+
+# Logs et rapports
+*.log
+*.csv
+*.out
